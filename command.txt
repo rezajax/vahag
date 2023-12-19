@@ -143,3 +143,23 @@ https://www.cyberciti.biz/faq/linux-ip-command-examples-usage-syntax/#:~:text=Th
 
 
 
+#----------------------------------------------------------- iptables
+https://unix.stackexchange.com/questions/205867/viewing-all-iptables-rules
+
+
+When using the -L, --list option to list the current firewall rules, you also need to specify the appropriate Netfilter table (one of filter, nat, mangle, raw or security). So, if you’ve added a rule for the nat table, you should explicitly specify this table using the -t, --table option:
+
+iptables --table nat --list
+
+Or using the options short form:
+
+iptables -t nat -L
+
+If you don’t specify a specific table, the filter table is used as the default.
+
+
+
+
+iptables --table nat --list
+iptables -t nat -L
+
