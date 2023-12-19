@@ -163,3 +163,8 @@ If you don’t specify a specific table, the filter table is used as the default
 iptables --table nat --list
 iptables -t nat -L
 
+
+
+ufw reset
+Or you can do it in single command –
+iptables -F
