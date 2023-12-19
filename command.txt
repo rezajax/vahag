@@ -168,3 +168,6 @@ iptables -t nat -L
 ufw reset
 Or you can do it in single command –
 iptables -F
+
+
+https://www.cyberciti.biz/faq/how-to-list-all-iptables-rules-in-linux/
