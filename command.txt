@@ -135,6 +135,19 @@ ip addr add 192.168.31.157/24 brd + dev enxde65760a7664
 
 ip netns add reza && ip link set enxd6607169deb5 netns reza && ip netns exec reza /bin/bash
 
+
+
+
+ip l add wg0 type wireguard
+ip link set wg0 netns 1
+
+
+wg setconf wg0 /etc/wireguard/wg0.conf
+ip a add 10.103.150.1/24 dev wg0
+ip l set wg0 up 
+ip lr add default dev wg0
+
+
 #--------------------------------------------------compare net-tools vs ip 
 netns --> ss
 
