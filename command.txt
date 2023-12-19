@@ -143,7 +143,7 @@ ip link set wg0 netns 1
 
 
 wg setconf wg0 /etc/wireguard/wg0.conf
-ip a add 10.103.150.1/24 dev wg0
+    ip a add 10.103.150.1/24 dev wg0
 ip l set wg0 up 
 ip lr add default dev wg0
 
@@ -184,3 +184,29 @@ iptables -F
 
 
 https://www.cyberciti.biz/faq/how-to-list-all-iptables-rules-in-linux/
+
+
+
+
+
+#-----------------------------------------veth
+
+
+
+ip netns add ns1
+ip l set usb1 netns ns1
+
+    #create terminal for control ns
+    ip netns exec ns1 bash 
+
+ip l add veth1 type veth peer veth2
+ip link set veth1 netns ns1
+ip addr add 10.10.1.1/24 dev veth1
+ip link set veth1 up
+
+    #in ns
+    ip addr add 10.10.1.2/24 dev veth2
+    ip link set veth2 up
+    ip route add default via 10.10.1.1
+
+
