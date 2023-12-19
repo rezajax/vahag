@@ -200,7 +200,7 @@ ip l set usb1 netns ns1
     ip netns exec ns1 bash 
 
 ip l add veth1 type veth peer veth2
-ip link set veth1 netns ns1
+ip link set veth2 netns ns1
 ip addr add 10.10.1.1/24 dev veth1
 ip link set veth1 up
 
@@ -208,5 +208,12 @@ ip link set veth1 up
     ip addr add 10.10.1.2/24 dev veth2
     ip link set veth2 up
     ip route add default via 10.10.1.1
+
+
+iptables -t nat -A POSTROUTING -s 10.10.1.0/24 -o wlp2s0 -j MASQUERADE 
+iptables -A FORWARD -o wlp2s0 -i veth1 -j ACCEPT
+iptables -A FORWARD -i wlp2s0 -o veth1 -j ACCEPT
+
+
 
 
