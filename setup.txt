@@ -1,0 +1,164 @@
+apt update && upgrade
+
+wg genkey > private.key
+sudo chmod go= /etc/wireguard/private.key
+wg pubkey < private.key > pubkey.key
+
+sudo nano /etc/wireguard/wg0.conf
+
+
+#---------------------
+sudo nano /etc/sysctl.conf
+sudo sysctl -p
+
+
+#!/bin/bash
+
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    exit
+fi
+
+# Set up IP forwarding for IPv4
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+
+# Set up IP forwarding for IPv6
+echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
+
+# Apply the changes
+sysctl -p
+
+echo "IP forwarding configuration completed."
+#---------------------
+
+
+
+sudo apt install ufw
+ufw enable
+
+sudo ufw allow 51820/udp
+sudo ufw allow OpenSSH
+
+sudo ufw disable
+sudo ufw enable
+sudo ufw status
+
+sudo systemctl start ufw
+
+cd
+
+#---------------------
+sudo systemctl enable wg-quick@wg0.sudo ufw statusservice
+sudo systemctl start wg-quick@wg0.service
+sudo systemctl status wg-quick@wg0.service
+
+#---------------------
+/etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = ./private.key
+Address = 10.8.0.1/24, fd0d:86fa:c3bc::1/64
+ListenPort = 51820
+SaveConfig = true
+
+PostUp = ufw route allow in on wg0 out on eth0
+PostUp = iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+PostUp = ip6tables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+PreDown = ufw route delete allow in on wg0 out on eth0
+PreDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+PreDown = ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+
+PostUp = ufw route allow in on wg0 out on wlan0
+PostUp = iptables -t nat -I POSTROUTING -o wlan0 -j MASQUERADE
+PostUp = ip6tables -t nat -I POSTROUTING -o wlan0 -j MASQUERADE
+PreDown = ufw route delete allow in on wg0 out on wlan0
+PreDown = iptables -t nat -D POSTROUTING -o wlan0 -j MASQUERADE
+PreDown = ip6tables -t nat -D POSTROUTING -o wlan0 -j MASQUERADE
+
+
+[Peer]
+PublicKey = ./clients/rz0pub.key
+AllowedIPs = 10.8.0.2/32, fd0d:86fa:c3bc::/128
+
+
+
+
+
+#-------------------------------
+/etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = iNHGfpVPVhC9L3DQOVQLlZ/lTb4PLvT+Gyq93rpKPno=
+Address = 10.8.0.2/24
+Address = fd0d:86fa:c3bc::2/64
+
+[Peer]
+PublicKey = U1WxNALmQNw06A6Tv/wO84jXGVpXro0N/BqxPbTQVAU=
+AllowedIPs = 10.8.0.0/24, fd0d:86fa:c3bc::/6433
+Endpoint = 192.168.0.111:51820
+
+
+AllowedIPs = 0.0.0.0/0
+Endpoint = 192.168.0.111:51820
+
+#----------------------------------
+qr
+
+qrencode -t ansiutf8 wg-client.conf
+qrencode -t ansiutf8 < wg-client.conf
+
+
+#------------------
+tmp
+                                                           
+[Interface]
+Address = 10.252.1.1/32
+PrivateKey = EOjz4fqqo9r3uOuRYeNHo/arz3ABEaots50p4znYTnA=
+DNS = 192.168.0.1
+MTU = 1450
+
+#PostUp = ufw route allow in on wg0 out on wlp2s0
+#PostUp = iptables -t nat -I POSTROUTING -o wlp2s0 -j MASQUERADE
+#PostUp = ip6tables -t nat -I POSTROUTING -o wlp2s0 -j MASQUERADE
+#PreDown = ufw route delete allow in on wg0 out on wlp2s0
+#PreDown = iptables -t nat -D POSTROUTING -o wlp2s0 -j MASQUERADE
+#PreDown = ip6tables -t nat -D POSTROUTING -o wlp2s0 -j MASQUERADE
+
+PostUp = ip rule add table 200 from 192.168.0.112
+PostUp = ip route add table 200 default via 192.168.0.112
+PreDown = ip rule delete table 200 from 192.168.0.112
+PreDown = ip route delete table 200 default via 192.168.0.112
+
+[Peer]
+PublicKey = hlU2B5aHeNjLwbDMldLV0e42D6Z5crbx+B3ASitWBSc=
+PresharedKey = QosBZdexDvVFuzcrDTW+f7HDPjDxD5fslwHCz5cPZ7w=
+AllowedIPs = 0.0.0.0/0
+Endpoint = 192.168.0.111:51820
+#PersistentKeepalive = 15
+
+
+
+
+
+
+
+ip link set up dev wg0
+
+sudo systemctl stop wg-quick@merge.service
+sudo systemctl start wg-quick@merge.service
+sudo systemctl status wg-quick@merge.service
+
+
+
+curl --interface usb0 icanhazip.com
+curl --interface usb1 icanhazip.com
+
+
+sudo ip route add default via 192.168.0.1 dev wlan0
+sudo ip route replace default via 192.168.0.1 dev wlan0 proto dhcp src 192.168.0.111 metric 305
+sudo ip route del default via 192.168.0.1 dev wlan0
+
+
+sudo ip route change 192.168.0.0/24 dev wlan0 metric 200
+
+

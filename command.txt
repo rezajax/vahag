@@ -1,0 +1,142 @@
+#list name ports
+less /etc/services
+
+
+
+netstat -na | grep ESTAB
+https://www.explainshell.com/explain?cmd=netstat+-na+%7C+grep+ESTAB
+
+he simplest solution is:
+
+rm -f .ssh/known_hosts
+ssh will recreate the file again, but you lose key checking for other hosts!
+
+Or, you can use:
+
+ssh-keygen -R "hostname"
+Or the ssh "man-in-the-middle" message should indicate which line of the known_hosts file has the offending fingerprint. Edit the file, jump to that line and delete it.
+
+
+ip netns
+
+
+ssh-keygen -R 192.168.0.111
+
+
+#--------------------------------------------------ssh
+#change net metric
+sudo apt-get install ifmetric
+ifmetric 
+
+
+
+iptables -L -n -t nat
+
+
+
+
+#-----------------------------------------------------netns - network name space
+
+ip netns show wan1
+
+ip -n physical link
+ip netns exec wan1 ip link
+
+
+ switches ip to the specified network namespace NETNS.  Actually it just simplifies executing of:
+
+              ip netns exec NETNS ip [ OPTIONS ] OBJECT { COMMAND | help }
+
+              to
+
+              ip -n[etns] NETNS [ OPTIONS ] OBJECT { COMMAND | help }
+
+
+
+
+
+PostUp = ip netns add physical
+PostUp = ip link set usb0 netns physical
+PostUp = ip -n physical link add wg0 type wireguard
+PostUp = ip -n physical link set wg0 netns 1
+#PostUp = ip netns exec physical dhcpcd wlan0 لازم نیست چون من وای فای رو نبرم تو نیم اسپیس
+
+PostUp = wg setconf wg0 /etc/wireguard/wg0.conf
+PostUp = ip addr add 10.103.150.1/24 dev wg0 # هر چند تا بخواهیم میشه اد کرد!  ip addr add 10.103.150.1/32 dev wg0
+PostUp = ip link set wg0 up
+PostUp = ip route add default dev wg0
+
+
+
+
+ip netns add physical
+ip link set usb0 netns physical
+ip -n physical link add wg0 type wireguard
+ip -n physical link set wg0 netns 1
+ip netns exec physical dhcpcd wlan0
+
+
+
+
+ip addr 
+ip a
+ip address
+
+
+ip link 
+ip l
+
+ip route 
+ip r
+
+
+#set loopback up
+ip l set lo up  
+ip l set up lo
+ip link set up lo 
+ip link set lo up 
+
+
+ip a flush dev enx06365a98b2b8
+
+
+
+#Displaying all Linux IP address
+sudo ip -br -c addr show
+sudo ip -br -c link show
+
+
+ip netns exec ali ip link
+ip -n ali link
+
+ip netns exec ali ip route
+ip -n ali route
+
+ip netns exec ali route
+in main is: route
+
+ip netns exec ali ping -I usb0 1.1.1.1
+
+
+
+
+
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+
+
+ip addr add 192.168.31.157/24 brd + dev enxde65760a7664 
+
+
+ip netns add reza && ip link set enxd6607169deb5 netns reza && ip netns exec reza /bin/bash
+
+#--------------------------------------------------compare net-tools vs ip 
+netns --> ss
+
+https://www.cyberciti.biz/faq/linux-ip-command-examples-usage-syntax/#:~:text=The%20ip%20command%20is%20used,command%20on%20modern%20Linux%20distributions.
+
+
+
+

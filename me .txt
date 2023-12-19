@@ -1,0 +1,190 @@
+me 
+
+
+GNU nano 5.4                                                               wg0.conf                                                                         
+[Interface]
+Address = 10.8.0.1/24
+Address = fd0d:86fa:c3bc::1/64
+SaveConfig = true
+PostUp = ufw route allow in on wg0 out on wlan0
+PostUp = iptables -t nat -I POSTROUTING -o wlan0 -j MASQUERADE
+PostUp = ip6tables -t nat -I POSTROUTING -o wlan0 -j MASQUERADE
+PreDown = ufw route delete allow in on wg0 out on wlan0
+PreDown = iptables -t nat -D POSTROUTING -o wlan0 -j MASQUERADE
+PreDown = ip6tables -t nat -D POSTROUTING -o wlan0 -j MASQUERADE
+ListenPort = 51820
+PrivateKey = cICIFFHqK86eGjaRo/G10kqpD5tOr3AC+1MRouiwXWw=
+
+[Peer]
+PublicKey = m8MLpi5TyzLkqESVYv356XwcjBjFC6GzKf19D2ywzho=
+PresharedKey = uYkFKj13Xii1yJU0RyOLvAvCKMepy5qdfqd1l5Xjafg=
+AllowedIPs = fd0d:86fa:c3bc::/128
+
+[Peer]
+PublicKey = PeURxj4Q75RaVhBKkRTpNsBPiPSGb5oQijgJsTa29hg=
+AllowedIPs = 10.8.0.2/32, fd0d:86fa:c3bc::2/128
+
+
+  GNU nano 5.4                                                               rz0.conf                                                                         
+[Interface]
+PrivateKey = iNHGfpVPVhC9L3DQOVQLlZ/lTb4PLvT+Gyq93rpKPno=
+Address = 10.8.0.2/24
+Address = fd0d:86fa:c3bc::2/64
+
+[Peer]
+PublicKey = U1WxNALmQNw06A6Tv/wO84jXGVpXro0N/BqxPbTQVAU=
+PresharedKey = uYkFKj13Xii1yJU0RyOLvAvCKMepy5qdfqd1l5Xjafg=
+AllowedIPs = 10.8.0.0/24, fd0d:86fa:c3bc::/64
+Endpoint = 192.168.0.111:51820
+
+
+
+
+
+
+pi
+
+[Interface]
+PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
+Address = 10.103.150.1/24
+MTU = 1420
+ListenPort = 51820
+### begin reza ###
+[Peer]
+PublicKey = N8FDdzNDJuglucSBztfyrAPM48b+nqWSetFq8wuXAQw=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+AllowedIPs = 10.103.150.2/32
+### end reza ###
+
+
+
+[Interface]
+PrivateKey = yObE9JpALYdM9KprbPJUYLyOizTHUwCXD8RQxmbQk1k=
+Address = 10.103.150.2/24
+DNS = 9.9.9.9, 149.112.112.112
+
+[Peer]
+PublicKey = Ryql2f6nJgRSyPSldf4b8ygIakxtHlAgMMgRAKFAtnA=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+Endpoint = 192.168.0.111:51820
+AllowedIPs = 0.0.0.0/0, ::0/0
+
+
+
+pi for rez2
+
+[Interface]
+PrivateKey = UNbw94qzi6U7NkhfCvQB4ABAhE2WC9DNWWw3yESHLlo=
+Address = 20.103.150.1/24
+MTU = 1420
+ListenPort = 51821
+### begin reza ###
+[Peer]
+PublicKey = CT9d6pGLtwWVEc5t1ahjiv9Wq9VCprBWxJakcHKoBCo=
+PresharedKey = J157SL293BB0l9yUz5bb/YKXVe3J1TrSTcXNwPACiUs=
+AllowedIPs = 20.103.150.2/32
+### end reza ###
+
+
+
+[Interface]
+PrivateKey = MLAI0Sm6NfRAhotVSsdTz3sQaObgF01GdhZJn2R6TEo=
+Address = 20.103.150.2/24
+DNS = 9.9.9.9, 149.112.112.112
+
+[Peer]
+PublicKey = MNLPKF46D5E9KIkdUHNgEVDaYfFSjHfKPoTOROfZP1c=
+PresharedKey = J157SL293BB0l9yUz5bb/YKXVe3J1TrSTcXNwPACiUs=
+Endpoint = 192.168.8.111:51820
+AllowedIPs = 0.0.0.0/0, ::0/0
+
+
+
+2
+#--------------------------------------------------------------------------
+wg0
+[Interface]
+PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
+Address = 10.103.150.1/24
+MTU = 1420
+ListenPort = 51820
+
+PostUp = ufw route allow in on wg0 out on usb0
+PostUp = iptables -t nat -I POSTROUTING -o usb0 -j MASQUERADE
+PostUp = ip6tables -t nat -I POSTROUTING -o usb0 -j MASQUERADE
+PreDown = ufw route delete allow in on wg0 out on usb0
+PreDown = iptables -t nat -D POSTROUTING -o usb0 -j MASQUERADE
+PreDown = ip6tables -t nat -D POSTROUTING -o usb0 -j MASQUERADE
+
+
+
+#PostUp = iptables -t nat -A POSTROUTING -o usb0 -j MASQUERADE
+#PostUp = iptables -A FORWARD -i usb0 -o wg0 -j ACCEPT
+#PostUp = iptables -A FORWARD -i wg0 -o usb0 -j ACCEPT
+#PostDown = iptables -t nat -D POSTROUTING -o usb0 -j MASQUERADE
+#PostDown = iptables -D FORWARD -i usb0 -o wg0 -j ACCEPT
+#PostDown = iptables -D FORWARD -i wg0 -o usb0 -j ACCEPT
+
+### begin reza ###
+[Peer]
+PublicKey = N8FDdzNDJuglucSBztfyrAPM48b+nqWSetFq8wuXAQw=
+#PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+AllowedIPs = 10.103.150.2/32
+### end reza ###
+
+
+
+
+
+wg1
+[Interface]
+PrivateKey = UNbw94qzi6U7NkhfCvQB4ABAhE2WC9DNWWw3yESHLlo=
+Address = 20.103.150.1/24
+MTU = 1420
+ListenPort = 51821
+
+
+#PostUp = ufw route allow in on wg1 out on usb1
+#PostUp = iptables -t nat -I POSTROUTING -o usb1 -j MASQUERADE
+#PostUp = ip6tables -t nat -I POSTROUTING -o usb1 -j MASQUERADE
+#PreDown = ufw route delete allow in on wg1 out on usb1
+#PreDown = iptables -t nat -D POSTROUTING -o usb1 -j MASQUERADE
+#PreDown = ip6tables -t nat -D POSTROUTING -o usb1 -j MASQUERADE
+
+
+
+PostUp = iptables -t nat -A POSTROUTING -o usb1 -j MASQUERADE
+PostUp = iptables -A FORWARD -i usb1 -o wg1 -j ACCEPT
+PostUp = iptables -A FORWARD -i wg1 -o usb1 -j ACCEPT
+
+
+PostDown = iptables -t nat -D POSTROUTING -o usb1 -j MASQUERADE
+PostDown = iptables -D FORWARD -i usb1 -o wg1 -j ACCEPT
+PostDown = iptables -D FORWARD -i wg1 -o usb1 -j ACCEPT
+
+### begin reza ###
+[Peer]
+PublicKey = CT9d6pGLtwWVEc5t1ahjiv9Wq9VCprBWxJakcHKoBCo=
+PresharedKey = J157SL293BB0l9yUz5bb/YKXVe3J1TrSTcXNwPACiUs=
+AllowedIPs = 20.103.150.2/32
+### end reza ###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
