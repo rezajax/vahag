@@ -265,7 +265,8 @@ iptables -A FORWARD -i wg0 -o enx8ef7deb53ac9 -j ACCEPT
 
 
 #------------------------------------------------fwmark
-ip r default show all
+ip r show table all
+
 
 
 
