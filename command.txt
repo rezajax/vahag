@@ -249,3 +249,14 @@ mkdir -p /etc/netns/rover && echo &quotnameserver 1.1.1.1&quot > /etc/netns/rove
 
 #------------------------------ifmetric
 https://unix.stackexchange.com/questions/245208/modifying-existing-route-entry-in-linux
+
+
+
+
+#---------------------------------- wg without ns
+
+iptables -t nat -A POSTROUTING -s 10.103.150.0/24 -o enx020a6734386a -j MASQUERADE 
+iptables -A FORWARD -o wg0 -i enx8ef7deb53ac9 -j ACCEPT
+iptables -A FORWARD -i wg0 -o enx8ef7deb53ac9 -j ACCEPT
+
+
