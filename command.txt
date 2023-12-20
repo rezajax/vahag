@@ -225,7 +225,7 @@ iptables -A FORWARD -i wlp2s0 -o veth1 -j ACCEPT
 wg setconf wg0 /etc/wireguard/wg0.conf
 ip a add 10.103.150.1/24 dev wg0
 ip l set wg0 up 
-ip lr add default dev wg0
+ip r add default dev wg0
 
 #--way 2 wg in ns
 
@@ -234,8 +234,14 @@ ip lr add default dev wg0
     wg setconf wg0 /etc/wireguard/wg0.conf
     ip a add 10.103.150.1/24 dev wg0
     ip l set wg0 up 
-    ip lr add default dev wg0
+    ip r add default dev wg0
 
     iptables -t nat -A POSTROUTING -s 10.103.150.1/24 -o veth2 -j MASQUERADE 
     iptables -A FORWARD -o wlp2s0 -i veth2 -j ACCEPT
     iptables -A FORWARD -i wlp2s0 -o veth2 -j ACCEPT
+
+
+
+
+#non
+mkdir -p /etc/netns/rover && echo &quotnameserver 1.1.1.1&quot > /etc/netns/rover/resolv.conf
