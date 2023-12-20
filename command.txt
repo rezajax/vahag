@@ -245,3 +245,7 @@ ip r add default dev wg0
 
 #non
 mkdir -p /etc/netns/rover && echo &quotnameserver 1.1.1.1&quot > /etc/netns/rover/resolv.conf
+
+
+#------------------------------ifmetric
+https://unix.stackexchange.com/questions/245208/modifying-existing-route-entry-in-linux
