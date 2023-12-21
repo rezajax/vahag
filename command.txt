@@ -271,3 +271,12 @@ ip route get 10.103.150.2
 ip route get 10.103.150.1
 
 ip r show table 2468
+
+
+
+#---------------------------------------------
+https://ubuntu.com/server/docs/wireguard-vpn-peer2site-router
+watch wg show
+
+
+ip route add 20.103.150.2/32 dev enx8ef7deb53ac9
