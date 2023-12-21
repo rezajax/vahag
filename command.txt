@@ -266,8 +266,8 @@ iptables -A FORWARD -i wg0 -o enx8ef7deb53ac9 -j ACCEPT
 
 #------------------------------------------------fwmark
 ip r show table all
+ip r show default
+ip route get 10.103.150.2
+ip route get 10.103.150.1
 
-
-
-
-
+ip r show table 2468
