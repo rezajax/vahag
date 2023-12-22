@@ -258,6 +258,7 @@ https://unix.stackexchange.com/questions/245208/modifying-existing-route-entry-i
 #---------------------------------- wg without ns
 
 iptables -t nat -A POSTROUTING -s 10.103.150.0/24 -o enx020a6734386a -j MASQUERADE 
+iptables -t nat -D POSTROUTING -s 10.103.150.2/32 -o enx020a6734386a -j MASQUERADE
 iptables -A FORWARD -o wg0 -i enx8ef7deb53ac9 -j ACCEPT
 iptables -A FORWARD -i wg0 -o enx8ef7deb53ac9 -j ACCEPT
 
@@ -285,6 +286,10 @@ traceroute -n --fwmark=1234 10.103.150.2
 ip route get 10.103.150.2
 ip route get from 10.103.150.2 iif wg0 to 192.168.0.117
 
+https://superuser.com/questions/1700905/wireguard-client-with-two-interfaces-use-one-interface-for-wireguard
+
+
+
 
 #--------------------------------------------- routing
 https://ubuntu.com/server/docs/wireguard-vpn-peer2site-router
@@ -300,3 +305,7 @@ iptables -A FORWARD -i enx020a6734386a -o wg1 -j ACCEPT
 iptables -A FORWARD -i wg1 -o enx020a6734386a -j ACCEPT
 
 ip r del default
+
+
+https://forum.libreelec.tv/thread/21906-wireguard-changes-the-default-route-although-not-configured/
+ip route add 192.168.152.243 via 10.103.150.2
