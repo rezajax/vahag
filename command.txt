@@ -272,11 +272,19 @@ ip route get 10.103.150.1
 
 ip r show table 2468
 
+https://serverfault.com/questions/1095450/sent-wg-trafic-to-eth1
+ip route add default dev wg0 table 123
+ip rule add iif eth1 lookup 123
+
+https://serverfault.com/questions/1147215/prevent-routing-loop-with-fwmark-in-wireguard
 
 
-#---------------------------------------------
+
+#--------------------------------------------- routing
 https://ubuntu.com/server/docs/wireguard-vpn-peer2site-router
 watch wg show
 
 
 ip route add 20.103.150.2/32 dev enx8ef7deb53ac9
+
+
