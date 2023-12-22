@@ -286,5 +286,11 @@ watch wg show
 
 
 ip route add 20.103.150.2/32 dev enx8ef7deb53ac9
+ip route add 20.103.150.1/32 dev enx8ef7deb53ac9
 
 
+
+iptables -A FORWARD -i enx020a6734386a -o wg1 -j ACCEPT
+iptables -A FORWARD -i wg1 -o enx020a6734386a -j ACCEPT
+
+ip r del default
