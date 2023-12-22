@@ -279,6 +279,12 @@ ip rule add iif eth1 lookup 123
 https://serverfault.com/questions/1147215/prevent-routing-loop-with-fwmark-in-wireguard
 
 
+traceroute -n --fwmark=1234 10.103.150.2
+
+
+ip route get 10.103.150.2
+ip route get from 10.103.150.2 iif wg0 to 192.168.0.117
+
 
 #--------------------------------------------- routing
 https://ubuntu.com/server/docs/wireguard-vpn-peer2site-router
