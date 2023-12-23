@@ -258,7 +258,7 @@ https://unix.stackexchange.com/questions/245208/modifying-existing-route-entry-i
 #---------------------------------- wg without ns
 
 iptables -t nat -A POSTROUTING -s 10.103.150.0/24 -o enx020a6734386a -j MASQUERADE 
-iptables -t nat -D POSTROUTING -s 10.103.150.2/32 -o enx020a6734386a -j MASQUERADE
+iptables -t nat -A POSTROUTING -s 10.103.150.2/32 -o enx020a6734386a -j MASQUERADE
 iptables -A FORWARD -o wg0 -i enx8ef7deb53ac9 -j ACCEPT
 iptables -A FORWARD -i wg0 -o enx8ef7deb53ac9 -j ACCEPT
 
@@ -309,3 +309,12 @@ ip r del default
 
 https://forum.libreelec.tv/thread/21906-wireguard-changes-the-default-route-although-not-configured/
 ip route add 192.168.152.243 via 10.103.150.2
+
+
+#------------------------------tcpdump
+https://medium.com/tangram-visions/what-they-dont-tell-you-about-setting-up-a-wireguard-vpn-46f7bd168478
+https://www.cyberciti.biz/faq/how-to-set-up-wireguard-firewall-rules-in-linux/
+https://gist.github.com/nealfennimore/92d571db63404e7ddfba660646ceaf0d
+
+sudo tcpdump -nn -i wg0
+sudo tcpdump -nn -i eth0 udp and port 51820
