@@ -318,3 +318,10 @@ https://gist.github.com/nealfennimore/92d571db63404e7ddfba660646ceaf0d
 
 sudo tcpdump -nn -i wg0
 sudo tcpdump -nn -i eth0 udp and port 51820
+
+
+
+
+#---------------------------------------  turn on forwarding in linux 
+
+cat /proc/sys/net/ipv4/ip_forward
