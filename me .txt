@@ -39,6 +39,38 @@ Endpoint = 192.168.0.111:51820
 
 
 
+#------------------------------------------ new Allowed IPs and Addresses 
+#modem working 
+
+[Interface]
+PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
+ListenPort = 51820
+Address = 192.168.0.199/23
+MTU = 1420
+
+[Peer]
+PublicKey = N8FDdzNDJuglucSBztfyrAPM48b+nqWSetFq8wuXAQw=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+AllowedIPs = 192.168.0.200/32
+
+
+
+
+
+[Interface]
+PrivateKey = yObE9JpALYdM9KprbPJUYLyOizTHUwCXD8RQxmbQk1k=
+Address = 192.168.0.200/32
+DNS = 9.9.9.9, 149.112.112.112
+
+[Peer]
+PublicKey = Ryql2f6nJgRSyPSldf4b8ygIakxtHlAgMMgRAKFAtnA=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+Endpoint = 192.168.0.111:51820
+AllowedIPs = 0.0.0.0/0, ::0/0
+
+
+
+#-----------------------------------------------------
 
 
 
