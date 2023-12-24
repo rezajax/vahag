@@ -70,6 +70,93 @@ AllowedIPs = 0.0.0.0/0, ::0/0
 
 
 
+
+#------------------raspberry pi
+
+[Interface]
+PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
+ListenPort = 51820
+Address = 192.168.42.220/32
+MTU = 1420
+
+[Peer]
+PublicKey = N8FDdzNDJuglucSBztfyrAPM48b+nqWSetFq8wuXAQw=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+AllowedIPs = 192.168.42.221/32
+
+
+
+
+
+[Interface]
+PrivateKey = yObE9JpALYdM9KprbPJUYLyOizTHUwCXD8RQxmbQk1k=
+Address = 192.168.42.221/32
+DNS = 9.9.9.9, 149.112.112.112 , 192.168.42.129
+
+[Peer]
+PublicKey = Ryql2f6nJgRSyPSldf4b8ygIakxtHlAgMMgRAKFAtnA=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+Endpoint = 192.168.8.111:51820
+AllowedIPs = 0.0.0.0/0, ::0/0
+
+
+
+iptables -t nat -A POSTROUTING -s 192.168.42.221 -o usb1 -j MASQUERADE 
+iptables -A FORWARD -o wg0 -i usb1 -j ACCEPT
+iptables -A FORWARD -o usb1 -i wg0 -j ACCEPT
+
+
+sudo tcpdump -nn -i usb1
+
+
+root@raspberrypi:/etc/wireguard# ip r show table all
+default via 192.168.230.66 dev usb0 proto dhcp src 192.168.230.73 metric 204 
+default via 192.168.42.129 dev usb1 proto dhcp src 192.168.42.231 metric 205 
+default via 192.168.8.1 dev wlan0 proto dhcp src 192.168.8.111 metric 303 
+192.168.8.0/24 dev wlan0 proto dhcp scope link src 192.168.8.111 metric 303 
+192.168.42.0/24 dev usb1 proto dhcp scope link src 192.168.42.231 metric 205 
+192.168.42.221 dev wg0 scope link 
+192.168.230.0/24 dev usb0 proto dhcp scope link src 192.168.230.73 metric 204 
+local 127.0.0.0/8 dev lo table local proto kernel scope host src 127.0.0.1 
+local 127.0.0.1 dev lo table local proto kernel scope host src 127.0.0.1 
+broadcast 127.255.255.255 dev lo table local proto kernel scope link src 127.0.0.1 
+local 192.168.8.111 dev wlan0 table local proto kernel scope host src 192.168.8.111 
+broadcast 192.168.8.255 dev wlan0 table local proto kernel scope link src 192.168.8.111 
+local 192.168.42.220 dev wg0 table local proto kernel scope host src 192.168.42.220 
+local 192.168.42.231 dev usb1 table local proto kernel scope host src 192.168.42.231 
+broadcast 192.168.42.255 dev usb1 table local proto kernel scope link src 192.168.42.231 
+local 192.168.230.73 dev usb0 table local proto kernel scope host src 192.168.230.73 
+broadcast 192.168.230.255 dev usb0 table local proto kernel scope link src 192.168.230.73 
+::1 dev lo proto kernel metric 256 pref medium
+fe80::/64 dev wlan0 proto kernel metric 256 pref medium
+fe80::/64 dev usb0 proto kernel metric 256 pref medium
+fe80::/64 dev usb1 proto kernel metric 256 pref medium
+default via fe80::a0a4:8aff:feff:a1af dev wlan0 proto ra metric 303 mtu 1500 pref medium
+local ::1 dev lo table local proto kernel metric 0 pref medium
+anycast fe80:: dev wlan0 table local proto kernel metric 0 pref medium
+anycast fe80:: dev usb0 table local proto kernel metric 0 pref medium
+anycast fe80:: dev usb1 table local proto kernel metric 0 pref medium
+local fe80::1dd0:f89c:143:80c7 dev wlan0 table local proto kernel metric 0 pref medium
+local fe80::2c22:2c20:d4da:eacd dev usb0 table local proto kernel metric 0 pref medium
+local fe80::9236:6551:68d7:86ed dev usb1 table local proto kernel metric 0 pref medium
+multicast ff00::/8 dev wlan0 table local proto kernel metric 256 pref medium
+multicast ff00::/8 dev usb0 table local proto kernel metric 256 pref medium
+multicast ff00::/8 dev usb1 table local proto kernel metric 256 pref medium
+multicast ff00::/8 dev wg0 table local proto kernel metric 256 pref medium
+
+root@raspberrypi:/etc/wireguard# ip r
+default via 192.168.230.66 dev usb0 proto dhcp src 192.168.230.73 metric 204 
+default via 192.168.42.129 dev usb1 proto dhcp src 192.168.42.231 metric 205 
+default via 192.168.8.1 dev wlan0 proto dhcp src 192.168.8.111 metric 303 
+192.168.8.0/24 dev wlan0 proto dhcp scope link src 192.168.8.111 metric 303 
+192.168.42.0/24 dev usb1 proto dhcp scope link src 192.168.42.231 metric 205 
+192.168.42.221 dev wg0 scope link 
+192.168.230.0/24 dev usb0 proto dhcp scope link src 192.168.230.73 metric 204 
+
+ip rule
+
+
+
 #-----------------------------------------------------
 
 
