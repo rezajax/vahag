@@ -320,6 +320,9 @@ sudo tcpdump -nn -i wg0
 sudo tcpdump -nn -i eth0 udp and port 51820
 
 
+# tcpdump -i wlan0 -n host 146.255.36.1
+tcpdump -i usb0 -n host 146.255.36.1
+
 
 
 #---------------------------------------  turn on forwarding in linux 
