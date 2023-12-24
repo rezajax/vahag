@@ -1,3 +1,19 @@
+#------------------------------------turn on ip forwarding 
+https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux
+checking: 
+sysctl net.ipv4.ip_forward
+cat /proc/sys/net/ipv4/ip_forward
+sysctl -p
+
+on:
+sysctl -w net.ipv4.ip_forward=1
+sudo nano /etc/sysctl.conf 
+
+ echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+
+
 apt update && upgrade
 
 wg genkey > private.key
