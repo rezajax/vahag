@@ -70,6 +70,10 @@ AllowedIPs = 0.0.0.0/0, ::0/0
 
 
 #------------------------------------------------------------- ip rule 
+ip route show table 1
+ip r show table all
+
+
 wlan: 
 [Interface]
 PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
@@ -91,6 +95,13 @@ PublicKey = N8FDdzNDJuglucSBztfyrAPM48b+nqWSetFq8wuXAQw=
 PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
 AllowedIPs = 192.168.42.221/32
 
+
+
+
+in the phone troubleshoot :
+ping 192.168.42.129 (router, in this seassion is phone1) = working 
+ping 192.168.42.220 working 
+ping 192.168.42.221 working
 
 
 usb1:
