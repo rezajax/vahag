@@ -278,6 +278,9 @@ ip route add default dev wg0 table 123
 ip rule add iif eth1 lookup 123
 
 https://serverfault.com/questions/1147215/prevent-routing-loop-with-fwmark-in-wireguard
+wg set wg0 fwmark 1234
+
+ip -4 rule add not fwmark 1234 table 2468
 
 
 traceroute -n --fwmark=1234 10.103.150.2
@@ -328,3 +331,20 @@ tcpdump -i usb0 -n host 146.255.36.1
 #---------------------------------------  turn on forwarding in linux 
 
 cat /proc/sys/net/ipv4/ip_forward
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#-----------------other

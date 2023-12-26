@@ -107,6 +107,7 @@ iptables -A FORWARD -o usb1 -i wg0 -j ACCEPT
 
 
 sudo tcpdump -nn -i usb1
+sudo tcpdump -nn -i usb1 host 192.168.42.221
 
 
 root@raspberrypi:/etc/wireguard# ip r show table all
