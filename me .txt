@@ -159,6 +159,29 @@ ip rule
 
 
 #-----------------------------------------------------
+root@raspberrypi:/etc/wireguard# ip r
+default via 192.168.0.1 dev wlan0 proto dhcp src 192.168.0.111 metric 303
+192.168.0.0/24 dev wlan0 proto dhcp scope link src 192.168.0.111 metric 303
+192.168.0.200 via 192.168.0.199 dev wg1
+
+
+ ip route replace 192.168.0.200 via 192.168.0.199 dev wg1
+ ip route add 192.168.0.200 via 192.168.0.199 dev wg1
+
+
+
+
+
+
+
+
+woooooooooooooooooooooooooooooooooooooooooow
+
+sudo ip rule add from 192.168.42.221 table 1
+sudo ip route add default via 192.168.0.1 dev wlan0 table 1
+
+
+#-------------------------------------------------------
 
 
 
