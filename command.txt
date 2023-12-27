@@ -348,3 +348,81 @@ cat /proc/sys/net/ipv4/ip_forward
 
 
 #-----------------other
+
+root@raspberrypi:/etc/wireguard# ip neigh
+4.2.2.4 dev usb1  FAILED
+172.217.169.106 dev usb1  FAILED
+108.177.119.188 dev usb1  FAILED
+54.147.151.107 dev usb1  FAILED
+192.168.0.102 dev wlan0 lladdr 80:2b:f9:9a:1a:81 REACHABLE
+142.251.141.42 dev usb1  FAILED
+52.72.249.25 dev usb1  FAILED
+172.217.169.202 dev usb1  FAILED
+142.250.187.106 dev usb1  FAILED
+54.147.207.245 dev usb1  FAILED
+8.8.4.4 dev usb1  FAILED
+52.5.72.30 dev usb1  FAILED
+142.251.140.42 dev usb1  FAILED
+216.58.214.138 dev usb1  FAILED
+142.250.184.131 dev usb1  FAILED
+52.54.91.138 dev usb1  FAILED
+54.156.234.122 dev usb1  FAILED
+9.9.9.9 dev usb1  FAILED
+192.168.230.66 dev usb1  FAILED
+172.217.169.138 dev usb1  FAILED
+142.250.184.138 dev usb1  FAILED
+9.9.9.9 dev usb0  FAILED
+172.217.17.106 dev usb1  FAILED
+52.45.242.39 dev usb1  FAILED
+149.112.112.112 dev usb0  FAILED
+216.58.212.10 dev usb1  FAILED
+216.58.213.106 dev usb1  FAILED
+52.7.47.209 dev usb1  FAILED
+172.217.20.67 dev usb1  FAILED
+1.1.1.1 dev usb1  FAILED
+142.250.187.138 dev usb1  FAILED
+54.174.231.62 dev usb1  FAILED
+142.251.140.74 dev usb1  FAILED
+52.5.201.218 dev usb1  FAILED
+1.1.1.1 dev usb0  FAILED
+3.95.44.39 dev usb1  FAILED
+192.168.42.129 dev usb1 lladdr e2:10:86:5f:b0:52 REACHABLE
+172.217.20.74 dev usb1  FAILED
+2.23.160.226 dev usb1  FAILED
+54.172.29.197 dev usb1  FAILED
+8.8.8.8 dev usb1  FAILED
+54.225.208.107 dev usb1  FAILED
+54.161.82.91 dev usb1  FAILED
+192.168.0.1 dev wlan0 lladdr 0c:80:63:36:f9:7e STALE
+192.168.230.66 dev usb0 lladdr 32:17:55:36:51:8d STALE
+3.89.52.39 dev usb1  FAILED
+172.217.17.138 dev usb1  FAILED
+142.251.140.10 dev usb1  FAILED
+52.73.97.138 dev usb1  FAILED
+216.58.212.42 dev usb1  FAILED
+142.250.187.170 dev usb1  FAILED
+192.168.0.119 dev wlan0 lladdr 3a:01:5a:c1:31:59 REACHABLE
+172.217.17.234 dev usb1  FAILED
+fe80::29cf:a165:a6e2:982c dev usb0 lladdr a2:14:10:aa:1d:60 STALE
+fe80::d823:1b6b:d595:c0ce dev wlan0 lladdr b8:27:eb:21:fd:15 STALE
+fe80::9236:6551:68d7:86ed dev usb1 lladdr 02:0a:67:34:38:6a STALE
+fe80::b435:83ff:feca:fd39 dev wlan0 lladdr b6:35:83:ca:fd:39 STALE
+fe80::3801:5aff:fec1:3159 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
+
+ip neigh flush all
+#after that
+
+root@raspberrypi:/etc/wireguard# ip neigh
+192.168.0.102 dev wlan0 lladdr 80:2b:f9:9a:1a:81 REACHABLE
+192.168.42.129 dev usb1 lladdr e2:10:86:5f:b0:52 REACHABLE
+192.168.230.66 dev usb0 lladdr 32:17:55:36:51:8d REACHABLE
+192.168.0.119 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
+
+
+root@raspberrypi:/etc/wireguard# ip neigh
+192.168.0.102 dev wlan0 lladdr 80:2b:f9:9a:1a:81 REACHABLE
+192.168.42.129 dev usb1 lladdr e2:10:86:5f:b0:52 STALE
+192.168.0.1 dev wlan0 lladdr 0c:80:63:36:f9:7e STALE
+192.168.230.66 dev usb0 lladdr 32:17:55:36:51:8d STALE
+192.168.0.119 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
+fe80::3801:5aff:fec1:3159 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
