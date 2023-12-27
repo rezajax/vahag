@@ -426,3 +426,17 @@ root@raspberrypi:/etc/wireguard# ip neigh
 192.168.230.66 dev usb0 lladdr 32:17:55:36:51:8d STALE
 192.168.0.119 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
 fe80::3801:5aff:fec1:3159 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
+
+
+
+
+
+
+
+
+
+
+
+https://operavps.com/docs/check-open-ports-in-linux/
+ss -tulpn
+netstat -tulpn
