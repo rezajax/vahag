@@ -2,7 +2,12 @@ me
 
 #------------------------------------------------- last with rule 2
 
- echo 1 > /proc/sys/net/ipv4/ip_forward
+# in restart az bin 
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+#allways
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 
  [Interface]
 PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
