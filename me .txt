@@ -26,6 +26,8 @@ PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
 AllowedIPs = 10.103.150.2/32
 ### end reza ###
 
+
+
 phone:
 [Interface]
 PrivateKey = yObE9JpALYdM9KprbPJUYLyOizTHUwCXD8RQxmbQk1k=
@@ -47,12 +49,41 @@ AllowedIPs = 0.0.0.0/0, ::0/0
 
 
 
+[Interface]
+PrivateKey = UNbw94qzi6U7NkhfCvQB4ABAhE2WC9DNWWw3yESHLlo=
+Address = 20.103.150.1/24
+MTU = 1420
+ListenPort = 51821
+
+PostUp = iptables -t nat -A POSTROUTING -s 20.103.150.2 -o usb1 -j MASQUERADE
+PostUp = ip rule add from 20.103.150.2 table 2
+PostUp = ip route add default via 192.168.42.129 dev usb1 table 2
+
+PostDown = iptables -t nat -D POSTROUTING -s 20.103.150.2 -o usb1 -j MASQUERADE
+PostDown = ip rule del from 20.103.150.2 table 2
+PostDown = ip route del default via 192.168.42.129 dev usb1 table 2
+
+### begin reza ###
+[Peer]
+PublicKey = CT9d6pGLtwWVEc5t1ahjiv9Wq9VCprBWxJakcHKoBCo=
+PresharedKey = J157SL293BB0l9yUz5bb/YKXVe3J1TrSTcXNwPACiUs=
+AllowedIPs = 20.103.150.2/32
+### end reza ###
 
 
 
 
 
+[Interface]
+PrivateKey = MLAI0Sm6NfRAhotVSsdTz3sQaObgF01GdhZJn2R6TEo=
+Address = 20.103.150.2/32
+DNS = 9.9.9.9, 149.112.112.112
 
+[Peer]
+PublicKey = MNLPKF46D5E9KIkdUHNgEVDaYfFSjHfKPoTOROfZP1c=
+PresharedKey = J157SL293BB0l9yUz5bb/YKXVe3J1TrSTcXNwPACiUs=
+Endpoint =  37.186.119.196:10021
+AllowedIPs = 0.0.0.0/0, ::0/0
 
 
 
