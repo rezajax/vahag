@@ -9,6 +9,17 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 
+nano /etc/dhcpcd.conf
+interface wlan0
+metric 1
+
+#never test
+sudo apt-get install android-tools-adb
+
+#using this
+sudo apt-get install -y android-sdk-platform-tools
+
+
  [Interface]
 PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
 Address = 10.103.150.1/24
