@@ -440,3 +440,34 @@ fe80::3801:5aff:fec1:3159 dev wlan0 lladdr 3a:01:5a:c1:31:59 STALE
 https://operavps.com/docs/check-open-ports-in-linux/
 ss -tulpn
 netstat -tulpn
+
+
+sudo netstat -anp | grep <port_number>
+
+root@raspberrypi:/home/reza# sudo netstat -anp | grep 22
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      2433/sshd: /usr/sbi
+tcp        0      0 192.168.0.111:22        192.168.0.102:54199     ESTABLISHED 1940/sshd: reza [pr
+tcp        0      0 192.168.0.111:22        80.86.229.48:50026      SYN_RECV    -
+tcp        0      0 192.168.0.111:22        192.168.0.102:57875     ESTABLISHED 2394/sshd: reza [pr
+tcp6       0      0 :::22                   :::*                    LISTEN      2433/sshd: /usr/sbi
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           522/dhcpcd
+raw6       0      0 :::58                   :::*                    7           522/dhcpcd
+unix  3      [ ]         STREAM     CONNECTED     1022     731/systemd
+unix  3      [ ]         STREAM     CONNECTED     16938    522/dhcpcd           /run/dhcpcd.unpriv.sock
+unix  2      [ ]         DGRAM      CONNECTED     12662    522/dhcpcd
+unix  3      [ ]         STREAM     CONNECTED     16939    522/dhcpcd           /run/dhcpcd.unpriv.sock
+unix  3      [ ]         STREAM     CONNECTED     522      339/systemd-timesyn
+unix  2      [ ACC ]     STREAM     LISTENING     12655    522/dhcpcd           /run/dhcpcd.sock
+unix  2      [ ACC ]     STREAM     LISTENING     12656    522/dhcpcd           /run/dhcpcd.unpriv.sock
+unix  3      [ ]         STREAM     CONNECTED     723      422/polkitd
+unix  2      [ ]         DGRAM      CONNECTED     22520    2824/sudo
+unix  3      [ ]         STREAM     CONNECTED     13222    401/dbus-daemon      /run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     12277    999/ssh-agent        /tmp/ssh-Pbe5iuqNcKbB/agent.988
+unix  3      [ ]         STREAM     CONNECTED     12216    969/gvfsd-fuse
+unix  3      [ ]         STREAM     CONNECTED     12201    759/dbus-daemon      /run/user/1000/bus
+unix  3      [ ]         STREAM     CONNECTED     11622    401/dbus-daemon
+unix  2      [ ]         DGRAM      CONNECTED     15062    422/polkitd
+
+یک اتصال در حالت LISTEN بر روی IPv4.
+دو اتصال در حالت ESTABLISHED که نشان‌دهنده اتصالات SSH موجود به سرور از داخل شبکه لوکال به سرور (192.168.0.111) است.
+یک اتصال در حالت SYN_RECV که ممکن است نشان‌دهنده تلاش برقراری اتصال از WAN باشد.
