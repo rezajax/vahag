@@ -1,5 +1,63 @@
 me 
 
+#------------------------------------------------- last with rule 2
+
+ echo 1 > /proc/sys/net/ipv4/ip_forward
+
+ [Interface]
+PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
+Address = 10.103.150.1/24
+MTU = 1420
+ListenPort = 51820
+
+PostUp = iptables -t nat -A POSTROUTING -s 10.103.150.2 -o usb0 -j MASQUERADE
+PostUp = ip rule add from 10.103.150.2 table 1
+PostUp = ip route add default via 192.168.230.66 dev usb0 table 1
+
+PostDown = iptables -t nat -D POSTROUTING -s 10.103.150.2 -o usb0 -j MASQUERADE
+PostDown = ip rule del from 10.103.150.2 table 1
+PostDown = ip route del default via 192.168.230.66 dev usb0 table 1
+
+
+### begin reza ###
+[Peer]
+PublicKey = N8FDdzNDJuglucSBztfyrAPM48b+nqWSetFq8wuXAQw=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+AllowedIPs = 10.103.150.2/32
+### end reza ###
+
+phone:
+[Interface]
+PrivateKey = yObE9JpALYdM9KprbPJUYLyOizTHUwCXD8RQxmbQk1k=
+Address = 10.103.150.2/32
+DNS = 9.9.9.9, 149.112.112.112
+
+[Peer]
+PublicKey = Ryql2f6nJgRSyPSldf4b8ygIakxtHlAgMMgRAKFAtnA=
+PresharedKey = 3T49EeLjbned90DTFiuoEzDKoi+GVLVORhslNSg4TG0=
+Endpoint = 37.186.119.196:10020
+AllowedIPs = 0.0.0.0/0, ::0/0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 GNU nano 5.4                                                               wg0.conf                                                                         
 [Interface]
