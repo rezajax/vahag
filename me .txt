@@ -16,9 +16,45 @@ metric 1
 #never test
 sudo apt-get install android-tools-adb
 
-#using this
+#using this 28.0.2
 sudo apt-get install -y android-sdk-platform-tools
 
+
+
+usb1 (s9)
+adb -s 4c4855534f313498 shell svc usb setFunctions rndis
+adb -s 4c4855534f313498 shell svc usb setFunctions usb
+
+
+usb0
+adb -s R5CTB1TMKMM shell svc usb setFunctions rndis
+adb -s R5CTB1TMKMM shell svc usb setFunctions usb
+
+
+adb -s 4c4855534f313498 shell svc usb setFunctions usb
+adb -s R5CTB1TMKMM shell svc usb setFunctions usb
+#wating for activate
+adb -s R5CTB1TMKMM shell svc usb setFunctions rndis 
+#wating for activate
+adb -s 4c4855534f313498 shell svc usb setFunctions rndis
+
+wg-quick up wg0
+wg-quick up wg1
+
+
+
+
+adb -s 4c4855534f313498 shell svc usb setFunctions usb
+adb -s R5CTB1TMKMM shell svc usb setFunctions usb
+
+adb -s R5CTB1TMKMM shell svc usb setFunctions rndis 
+if "curl --interface usb0 icanhazip.com" get ip then print ip and next to new line
+
+adb -s 4c4855534f313498 shell svc usb setFunctions rndis
+if "curl --interface usb1 icanhazip.com" get ip then print ip and next to new line
+
+wg-quick up wg0
+wg-quick up wg1
 
  [Interface]
 PrivateKey = 6PRc6pb2rFNomqV4oxBP6N2o4JLhTRqBbfYv78CcjGQ=
