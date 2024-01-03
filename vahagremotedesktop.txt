@@ -13,3 +13,7 @@ newCmd
 
 
 DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AfJohXnINCIVY-HK-EaoZAYG0IScer4fWO9eu_A_7WYNFrpsokQHi96DC5gAMsphGE3MMw" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)
+
+
+
+DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AfJohXnPjeCTmOvfnzUjGAuEzNAuOBsaIowjK3UMkjfYgO2jkB7Fec7DVO2GsPXW99VFog" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)
