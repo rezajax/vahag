@@ -1,0 +1,6 @@
+cmd 
+"%PROGRAMFILES(X86)%\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" --code="4/0AfJohXngS5lEqPbNMtwcXPX0pe8cRXeaVLJ2yQ_Ssnk6aSk7b1Z8g5arwotU8G8RAg0hkw" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=%COMPUTERNAME%
+powershell
+& "${Env:PROGRAMFILES(X86)}\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" --code="4/0AfJohXngS5lEqPbNMtwcXPX0pe8cRXeaVLJ2yQ_Ssnk6aSk7b1Z8g5arwotU8G8RAg0hkw" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$Env:COMPUTERNAME
+debian
+DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AfJohXngS5lEqPbNMtwcXPX0pe8cRXeaVLJ2yQ_Ssnk6aSk7b1Z8g5arwotU8G8RAg0hkw" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)
