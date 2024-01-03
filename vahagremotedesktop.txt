@@ -8,3 +8,8 @@ DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AfJohXngS5lEqPb
 
 newCmd
 "%PROGRAMFILES(X86)%\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" --code="4/0AfJohXkMVWn5mXeHjx9oUlqaPuTgXDZ8UYO5iBjUjg8GDCpsH1o6T08h4kljydNac08vVQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=%COMPUTERNAME%
+
+
+
+
+DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AfJohXnINCIVY-HK-EaoZAYG0IScer4fWO9eu_A_7WYNFrpsokQHi96DC5gAMsphGE3MMw" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)
